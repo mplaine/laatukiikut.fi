@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Laatukiikut</title>
+    <title>Suomen Parhaat Boulderit</title>
     <meta name="viewport" content="initial-scale=1.0" />
     <meta charset="utf-8" />
+    <script src="js/third-party/jquery-3.1.0.min.js"></script>
+    <script src="js/third-party/papaparse.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/boulder.css" />
   </head>
   <body>
-    <h1>Laatukiikut (master)</h1>
+    <div id="map"></div>
+    <aside id="sidebar">
+      <button id="sidebar-close">Sulje</button>
+      <div class="info">
+        <h1>Suomen Parhaat Boulderit</h1>
+        <p>Suomen parhaat boulderit kätevästi kartalla. Missä sijaitsee lähin laatuboulderi? Entä miten löytää todelliset timanttiboulderit massasta? Avaa kartta ja totea, että keksit juuri tekemistä <span class="strike">loppuviikoksi</span> loppuelämäksi.</p>
+        <p>Kartalla esitettävä tieto perustuu Suomen Parhaat Boulderit 2016 -kyselyn <a href="#" target="_blank">tuloksiin</a>. Kyselyn tulokset ovat kaikille avointa tietoa.</p>
+        <p>Tämän palvelun ovat toteuttaneet <a href="https://twitter.com/mplaine" target="_blank">Markku Laine</a> ja <a href="#" target="_blank">Jussi Leskinen</a>, joilta loppuivat lähialueen laatukiikut kesken.</p>
+      </div>
+    </aside>
+    <script type="text/javascript" src="js/datasource.js"></script>
+    <script type="text/javascript" src="js/boulder.js"></script>
+    <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?v=3.24&key=AIzaSyAEdHStftpbGYbUl48xILoe6c9y_HyPzv4&callback=initialize&language=fi&region=FI"></script>
   </body>
 </html>
