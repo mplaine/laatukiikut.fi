@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Suomen Parhaat Boulderit</title>
-    <meta name="viewport" content="initial-scale=1.0" />
     <meta charset="utf-8" />
-    <script src="js/third-party/jquery-3.1.0.min.js"></script>
-    <script src="js/third-party/papaparse.min.js"></script>
-    <link type="text/css" rel="stylesheet" href="css/boulder.css" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Laatukiikut.fi | Suomen Parhaat Boulderit 2016</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link type="text/css" rel="stylesheet" href="css/boulder_2016.css" />
   </head>
   <body>
     <div id="map"></div>
     <aside id="sidebar">
       <button id="sidebar-close">Sulje</button>
       <div class="info">
-        <h1>Suomen Parhaat Boulderit</h1>
-        <p>Suomen parhaat boulderit kätevästi kartalla. Missä sijaitsee lähin laatuboulderi? Entä miten löytää todelliset timanttiboulderit massasta? Avaa kartta ja totea, että keksit juuri tekemistä <span class="strike">loppuviikoksi</span> loppuelämäksi.</p>
-        <p>Kartalla esitettävä tieto perustuu Suomen Parhaat Boulderit 2016 -kyselyn <a href="#" target="_blank">tuloksiin</a>. Kyselyn tulokset ovat kaikille avointa tietoa.</p>
-        <p>Tämän palvelun ovat toteuttaneet <a href="https://twitter.com/mplaine" target="_blank">Markku Laine</a> ja <a href="#" target="_blank">Jussi Leskinen</a>, joilta loppuivat lähialueen laatukiikut kesken.</p>
+        <h1>Laatukiikut.fi</h1>
+        <h2>&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot; Suomen Parhaat Boulderit 2016</h2>
+        <p>Suomen parhaat boulderit nyt kätevästi kartalla. Selaa karttaa ja suunnista lähialueesi laatubouldereille tai suunnittele vaikka pidempi reissu todellisten timanttien luokse!</p>
+        <p>Tämän palvelun on toteuttanut <a href="https://twitter.com/mplaine" target="_blank">Markku Laine</a>, jolta loppuivat lähialueen laatukiikut kesken.</p>
+        <p>Kartalla esittävä <a href="https://docs.google.com/spreadsheets/d/1OLrficW4lizuOlCJ5j66d0D3A68EeBDOp_5L6XCbxAs/edit?usp=sharing" target="_blank">tietoaineisto</a> ja palvelun <a href="https://github.com/mplaine/www.laatukiikut.fi" target="_blank">lähdekoodit</a> ovat avointa dataa.</p>
       </div>
     </aside>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script>window.jQuery || document.write( '<script type="text/javascript" src="js/third-party/jquery-3.1.0.min.js"><\/script>' )</script>
+    <script type="text/javascript" src="js/third-party/papaparse.min.js"></script>
     <script type="text/javascript" src="js/datasource.js"></script>
-    <script type="text/javascript" src="js/boulder.js"></script>
-    <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?v=3.24&key=AIzaSyAEdHStftpbGYbUl48xILoe6c9y_HyPzv4&callback=initialize&language=fi&region=FI"></script>
+    <script type="text/javascript" src="js/boulder_2016.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.24&key=AIzaSyAEdHStftpbGYbUl48xILoe6c9y_HyPzv4&callback=initialize&language=fi&region=FI"></script>
+    <script type="text/javascript" src="js/third-party/oms.min.js"></script>
+    <script type="text/javascript" src="js/third-party/markerclusterer.js"></script>
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-84111013-1', 'auto');
+      ga('send', 'pageview');
+    </script>
   </body>
 </html>
