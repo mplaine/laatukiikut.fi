@@ -1,4 +1,6 @@
 html, body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 15px;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -20,9 +22,11 @@ html, body {
 }
 .marker-info p {
   color: #777777;
-  font-size: 12px;
   margin: 0;
   padding: 0;
+}
+.marker-info .approximate-location {
+  color: #FF0000;
 }
 .marker-info p:nth-of-type( 2 ) {
   padding-top: 20px;
@@ -35,10 +39,8 @@ html, body {
 
 /* Sidebar */
 #sidebar {
-  background-color: #F1C40F;
+  background-color: #f1c40f;
   color: #FFFFFF;
-  font-family: Helvetica,Arial,sans-serif;
-  font-size: 15px;
   height: 100%;
   margin: 0;
   overflow-x: scroll;
@@ -66,12 +68,18 @@ html, body {
   padding: 20px;
 }
 #sidebar h1 {
-  font-size: 38px;
-  padding-top: 30px;
+  font-size: 32px;
+  margin: 100px 0 0 0;
+  padding: 0;
   text-transform: uppercase;
 }
+#sidebar h2 {
+  font-size: 13px;
+  margin: 0 0 30px 0;
+  padding: 0;
+}
 #sidebar p {
-  font-size: 12px;
+  font-size: 13px;
   margin: 15px 0 15px 0;
   padding: 0;
 }
