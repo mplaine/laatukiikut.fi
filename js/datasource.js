@@ -18,5 +18,6 @@ var DataSource  = function( file, loaded ) {
 
 // Methods
 DataSource.prototype.getData  = function() {
-  return this.data;
+  // Reverse the order so that top quality boulders are put last on the map
+  return this.data.reverse();
 };

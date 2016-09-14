@@ -1,7 +1,7 @@
 var dataSource;
 var map;
 var data;
-var HIGHLY_RECOMMENDED_LIMIT  = 6;
+var TOP_QUALITY_LIMIT  = 6;
 
 
 // Hide sidebar
@@ -23,7 +23,10 @@ function initializeMap() {
   // Initialize the map
   map             = new google.maps.Map( document.getElementById( 'map' ), {
     center: { lat: 65.1939658, lng: 26.6251252 }, // Finland
-    zoom: 5
+    zoom: 5,
+    minZoom: 4,
+    maxZoom: 15,
+    styles: [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
   });
 
   var oms         = new OverlappingMarkerSpiderfier( map, { markersWontMove: true, markersWontHide: true, keepSpiderfied: true } );
@@ -35,7 +38,7 @@ function initializeMap() {
   var iconBasic   = 'img/icon_boulder_quality.png';
   var iconTop     = 'img/icon_boulder_top_quality.png';
   var infowindow  = new google.maps.InfoWindow();
-  // Global OMS lisneter
+  // Global OMS listener
   oms.addListener( 'click', function( marker, event ) {
     infowindow.setContent( marker.content );
     infowindow.open( map, marker );
@@ -47,7 +50,7 @@ function initializeMap() {
     marker        = new google.maps.Marker({
       position: new google.maps.LatLng( data[ i ].Latitude, data[ i ].Longitude ),
       map: map,
-      icon: ( data[ i ].Votes >= HIGHLY_RECOMMENDED_LIMIT ) ? iconTop : iconBasic
+      icon: ( data[ i ].Votes >= TOP_QUALITY_LIMIT ) ? iconTop : iconBasic
     });
     marker.content   = getInfoWindowContent( data[ i ] );
     oms.addMarker( marker );
@@ -56,7 +59,7 @@ function initializeMap() {
   }
 
   // Create a marker cluster
-  var markerCluster = new MarkerClusterer( map, markers, { maxZoom: 10, styles: [ { url: iconCluster, height: 40, width: 40, anchor: [ 40, 40 ], textColor: '#000000', textSize: 12 } ] } );
+  var markerCluster = new MarkerClusterer( map, markers, { maxZoom: 10, minimumClusterSize: 2, styles: [ { url: iconCluster, height: 40, width: 40, anchor: [ 40, 40 ], textColor: '#000000', textSize: 12 } ] } );
 
   // Zoom in/out so that all markers are visible
   map.fitBounds( bounds );
