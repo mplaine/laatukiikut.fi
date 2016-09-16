@@ -192,15 +192,18 @@ function getInfoWindowContent( data ) {
 /////////////////////////////////////////////////////////////////////////////
 // JQUERY FUNCTIONS
 /////////////////////////////////////////////////////////////////////////////
-$( '#grade-filter' ).slider({
+var gradeSlider = $( '#grade-filter' ).slider({
   tooltip: 'always',
-  formatter: function( range ) {
-    if ( range[ 0 ] === range[ 1 ] ) {
-      return GRADES[ range[ 0 ] ];
+  formatter: function( gradeRange ) {
+    var gradeStr;
+    if ( gradeRange[ 0 ] === gradeRange[ 1 ] ) {
+      gradeStr = GRADES[ gradeRange[ 0 ] ];
     }
     else {
-      return GRADES[ range[ 0 ] ] + ' - ' + GRADES[ range[ 1 ] ];
+      gradeStr = GRADES[ gradeRange[ 0 ] ] + ' - ' + GRADES[ gradeRange[ 1 ] ];
     }
+  
+    return gradeStr;
   }
 });
 
@@ -213,16 +216,25 @@ $( document ).ready( function() {
 });
 
 $( '#grade-filter' ).on( 'change', function( event ) {
-  var oldRange    = event.value.oldValue;
-  var newRange    = event.value.newValue;
+  var oldGradeRange         = event.value.oldValue;
+  var gradeRange            = event.value.newValue;
 
-  if ( oldRange[ 0 ] !== newRange[ 0 ] || oldRange[ 1 ] !== newRange[ 1 ] ) {
-    var markers = markerClusterer.getMarkers();
+  // Grade range has actually changed
+  if ( oldGradeRange[ 0 ] !== gradeRange[ 0 ] || oldGradeRange[ 1 ] !== gradeRange[ 1 ] ) {
+    // Close information window
+    infoWindow.close();
+
+    var markers             = markerClusterer.getMarkers();
+    var topQualityChecked   = $( '#top-quality-filter' ).prop( 'checked' );
+    var basicQualityChecked = $( '#basic-quality-filter' ).prop( 'checked' );
 
     for ( var i = 0; i < markers.length; i++ ) {
-      var marker = markers[ i ];
+      var marker            = markers[ i ];
+      var quality           = marker.quality;
+      var qualityChecked    = ( quality === 'top' ) ? topQualityChecked : basicQualityChecked;
+      var gradeNumeric      = parseInt( marker.gradeNumeric );
 
-      if ( newRange[ 0 ] <= marker.gradeNumeric && marker.gradeNumeric <= newRange[ 1 ] ) {
+      if ( qualityChecked && ( gradeNumeric === 0 || ( gradeRange[ 0 ] <= gradeNumeric && gradeNumeric <= gradeRange[ 1 ] ) ) ) {
         marker.setVisible( true );
       }
       else {
@@ -231,23 +243,28 @@ $( '#grade-filter' ).on( 'change', function( event ) {
     }
     markerClusterer.repaint();
 
-    if ( newRange[ 0 ] === newRange[ 1 ] ) {
-      $( '#grade-display' ).text( GRADES[ newRange[ 1 ] ] );
+    if ( gradeRange[ 0 ] === gradeRange[ 1 ] ) {
+      $( '#grade-display' ).text( GRADES[ gradeRange[ 1 ] ] );
     }
     else {
-      $( '#grade-display' ).text( GRADES[ newRange[ 0 ] ] + ' - ' + GRADES[ newRange[ 1 ] ] );
+      $( '#grade-display' ).text( GRADES[ gradeRange[ 0 ] ] + ' - ' + GRADES[ gradeRange[ 1 ] ] );
     }
   }
 });
 
 $( '#top-quality-filter' ).on( 'change', function () {
-  var markers = markerClusterer.getMarkers();
-  
-  for ( var i = 0; i < markers.length; i++ ) {
-    var marker = markers[ i ];
+  // Close information window
+  infoWindow.close();
 
+  var markers        = markerClusterer.getMarkers();
+  var gradeRange     = gradeSlider.slider( 'getValue' );
+
+  for ( var i = 0; i < markers.length; i++ ) {
+    var marker       = markers[ i ];
+    var gradeNumeric = parseInt( marker.gradeNumeric );
+    
     if ( marker.quality === 'top' ) {
-      if ( this.checked === true ) {
+      if ( this.checked === true && ( gradeNumeric === 0 || ( gradeRange[ 0 ] <= gradeNumeric && gradeNumeric <= gradeRange[ 1 ] ) ) ) {
         marker.setVisible( true );
       }
       else {
@@ -259,13 +276,18 @@ $( '#top-quality-filter' ).on( 'change', function () {
 });
 
 $( '#basic-quality-filter' ).on( 'change', function () {
-  var markers = markerClusterer.getMarkers();
-  
+  // Close information window
+  infoWindow.close();
+
+  var markers        = markerClusterer.getMarkers();
+  var gradeRange     = gradeSlider.slider( 'getValue' );
+
   for ( var i = 0; i < markers.length; i++ ) {
-    var marker = markers[ i ];
+    var marker       = markers[ i ];
+    var gradeNumeric = parseInt( marker.gradeNumeric );
 
     if ( marker.quality === 'basic' ) {
-      if ( this.checked === true ) {
+      if ( this.checked === true && ( gradeNumeric === 0 || ( gradeRange[ 0 ] <= gradeNumeric && gradeNumeric <= gradeRange[ 1 ] ) ) ) {
         marker.setVisible( true );
       }
       else {
