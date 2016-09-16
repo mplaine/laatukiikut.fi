@@ -1,23 +1,22 @@
 // Constructors
-var DataSource  = function( file, loaded ) {
+var DataSource  = function( options ) {
   this.data     = [];
-  this.loaded   = loaded;
+  this.loaded   = options.callback;
 
   // Load csv data
   var that      = this;
-  Papa.parse( file, {
+  Papa.parse( options.file, {
     complete: function( results ) {
       that.data = results.data;
       that.loaded();
     },
     download: true,
-    encoding: "utf-8",
-    header: true
+    encoding: options.encoding,
+    header: options.header
   });
 };
 
 // Methods
 DataSource.prototype.getData  = function() {
-  // Reverse the order so that top quality boulders are put last on the map
-  return this.data.reverse();
+  return this.data;
 };
