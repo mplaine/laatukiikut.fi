@@ -18,6 +18,8 @@ html, body {
   font-family: Helvetica,Arial,sans-serif;
 }
 .marker-info h3 {
+  font-size: 16px;
+  font-weight: bold;
   margin: 0;
   padding: 0 0 2px 0;
 }
@@ -35,13 +37,14 @@ html, body {
 .marker-info a,
 .marker-info a:hover {
   color: #27ae60;
+  text-decoration: underline;
 }
 
 
 /* Sidebar */
 #sidebar {
-  background-color: #27ae60;
-  color: #FFFFFF;
+  background-color: #f1c40f;
+  color: #000000;
   height: 100%;
   margin: 0;
   overflow-x: scroll;
@@ -70,12 +73,14 @@ html, body {
 }
 #sidebar h1 {
   font-size: 34px;
+  font-weight: bold;
   margin: 100px 0 0 0;
   padding: 0;
   text-transform: uppercase;
 }
 #sidebar h2 {
   font-size: 14px;
+  font-weight: bold;
   margin: 0 0 40px 0;
   padding: 0;
 }
@@ -86,25 +91,6 @@ html, body {
 }
 #sidebar a,
 #sidebar a:hover {
-  color: #FFFFFF;
+  color: #000000;
   text-decoration: underline;
-}
-#sidebar .strike {
-  text-decoration: line-through;
-}
-#sidebar .slaideri {
-  text-align: center;
-}
-#slaideriarvo {
-  color: #FFFFFF;
-}
-#sidebar button {
-  background-color: #FFFFFF;
-  border: none;
-  color: #27ae60;
-  font-weight: bold;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
 }
