@@ -14,7 +14,6 @@
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
     <!-- Optional theme -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/css/bootstrap-slider.min.css" />
     <link type="text/css" rel="stylesheet" href="css/third-party/nouislider.min.css" />
     <link type="text/css" rel="stylesheet" href="css/third-party/nouislider.pips.css" />
     <link type="text/css" rel="stylesheet" href="css/third-party/nouislider.tooltips.css" />
@@ -29,10 +28,14 @@
         <h1>Laatukiikut.fi</h1>
         <h2>&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot; Suomen Parhaat Boulderit 2016</h2>
         <p>Bouldereita (<span id="visible-boulder-counter">0</span>)</p>
+        <div id="grade-range-display" class="row">
+          <div id="range-slider-value-min" class="col-xs-3"></div>
+          <div id="grade-range-separator" class="col-xs-3">&ndash;</div>
+          <div id="range-slider-value-max" class="col-xs-3"></div>
+        </div>
+        <p><div id="range"></div></p>
         <p><input id="top-quality-filter" type="checkbox" name="quality" value="top" checked="checked" /> <img src="img/marker_boulder_top_quality.png" /><input id="basic-quality-filter" type="checkbox" name="quality" value="basic" checked="checked" /> <img src="img/marker_boulder_basic_quality.png" /></p>
         <p><input id="male-gender-filter" type="checkbox" name="gender" value="male" checked="checked" /> Mies<input id="female-gender-filter" type="checkbox" name="gender" value="female" checked="checked" /> Nainen</p>
-        <p><input id="grade-filter" type="text" class="span2" value="" data-slider-min="7" data-slider-max="20" data-slider-step="1" data-slider-value="[7,20]" /></p>
-        <p><span id="grade-display">?</span></p>
         <p>Suomen parhaat boulderit nyt kätevästi kartalla. Selaa karttaa ja suunnista lähialueesi laatubouldereille tai suunnittele vaikka pidempi reissu todellisten timanttien luokse!</p>
         <p>Tämän palvelun ovat toteuttaneet <a href="mailto:markku.laine@gmail.com?subject=Laatukiikut.fi - Palaute">Markku Laine</a> ja <a href="mailto:leskinen.jussi@gmail.com?subject=Laatukiikut.fi - Palaute">Jussi Leskinen</a>, joilta loppuivat lähialueen laatukiikut kesken.</p>
         <p>Kartalla esittävä <a href="https://docs.google.com/spreadsheets/d/1OLrficW4lizuOlCJ5j66d0D3A68EeBDOp_5L6XCbxAs/edit?usp=sharing" target="_blank">tietoaineisto</a> ja palvelun <a href="https://github.com/mplaine/www.laatukiikut.fi" target="_blank">lähdekoodit</a> ovat avointa tietoa.</p>
@@ -42,10 +45,10 @@
     <script>window.jQuery || document.write( '<script type="text/javascript" src="js/third-party/jquery-3.1.0.min.js"><\/script>' )</script>
     <!-- Latest compiled and minified JavaScript -->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.2.0/bootstrap-slider.min.js"></script>
     <script type="text/javascript" src="js/third-party/markerclustererplus.min.js"></script>
     <script type="text/javascript" src="js/third-party/nouislider.min.js"></script>
     <script type="text/javascript" src="js/third-party/papaparse.min.js"></script>
+    <script type="text/javascript" src="js/third-party/wNumb.js"></script>
     <script type="text/javascript" src="js/datasource.js"></script>
     <script type="text/javascript" src="js/boulder_2016.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.24&key=AIzaSyDBpnQebdfQBLss4W7HjZSxjMpS_ujzEJM&language=fi&region=FI"></script>

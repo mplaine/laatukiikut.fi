@@ -95,3 +95,51 @@ html, body {
   color: #000000;
   text-decoration: underline;
 }
+#sidebar .noUi-connect {
+  background-color: #000000;
+}
+#range {
+  margin-bottom: 100px;
+  margin-left: auto;
+  margin-right: auto;  
+  width: 260px;
+}
+div#grade-range-display {
+  font-size: 40px;
+  margin-top: 100px;
+  text-align: center;
+}
+div#range-slider-value-min,
+div#range-slider-value-max {
+}
+div#grade-range-separator {
+  font-weight: lighter;
+}
+#range .noUi-value-large {
+  color: #333333;
+  margin-top: 8px;
+}
+#range .noUi-marker {
+  background: #333333;
+}
+.row {
+  margin: 0;
+  padding: 0;
+  width: 280px;
+}
+.col-xs-3 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.col-xs-3:nth-of-type(1) {
+  text-align: right;
+  width: 40%;
+}
+.col-xs-3:nth-of-type(2) {
+  width: 20%;
+}
+.col-xs-3:nth-of-type(3) {
+  text-align: left;
+  width: 40%;
+}

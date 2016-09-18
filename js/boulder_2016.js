@@ -8,6 +8,7 @@ var map;
 var markerClusterer;
 var MIN_VOTES_FOR_TOP_QUALITY = 6;
 var GRADES                    = [ '?', '1', '2', '3', '4', '4+', '5', '5+', '6A', '6A+', '6B', '6B+', '6C', '6C+', '7A', '7A+', '7B', '7B+', '7C', '7C+', '8A', '8A+', '8B', '8B+', '8C', '8C+', '9A' ];
+var rangeSlider;
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -15,6 +16,25 @@ var GRADES                    = [ '?', '1', '2', '3', '4', '4+', '5', '5+', '6A'
 /////////////////////////////////////////////////////////////////////////////
 // Initialize Application
 function initialize() {
+  // Create a grade range slider
+  rangeSlider = document.getElementById( 'range' );
+  noUiSlider.create( rangeSlider, {
+    start: [ 7, 20 ],
+    step: 1,
+    connect: true,
+    //tooltips: [ wNumb({ decimals: 0, edit: function( value ) { return GRADES[ value ]; } }), wNumb({ decimals: 0, edit: function( value ) { return GRADES[ value ]; } }) ],
+    format: wNumb({ decimals: 0 }),
+   pips: {
+     mode: 'range',
+     density: 8,
+     format: wNumb({ decimals: 0, edit: function( value ) { return GRADES[ value ]; } })
+   },
+    range: {
+      min: [  7 ],
+      max: [ 20 ]
+    }
+  });
+
   // Load data
   dataSource         = new DataSource({
     callback: initializeMap,
@@ -94,6 +114,9 @@ function initializeMap() {
 
   // Zoom map in/out to fit bounds
   map.fitBounds( bounds );
+
+  // Initialize the grade slider display
+  updateRangeSliderValue();  
 }
 
 function createMap( id ) {
@@ -189,9 +212,30 @@ function getInfoWindowContent( data ) {
   return content;
 }
 
+function updateRangeSliderValue() {
+  var rangeSliderValues = [
+    document.getElementById( 'range-slider-value-min' ),
+    document.getElementById( 'range-slider-value-max' )
+  ];
+  rangeSlider.noUiSlider.on( 'update', function( values, handle ) {
+    rangeSliderValues[ handle ].innerHTML = GRADES[ values[ handle ] ];
+    // Close information window
+    infoWindow.close();
+
+    var markers             = markerClusterer.getMarkers();
+    for ( var i = 0; i < markers.length; i++ ) {
+      setMarkerVisibility( markers[ i ] );
+    }
+
+    markerClusterer.repaint();
+    setVisibleMarkersCounter();
+  });
+}
+
 function setMarkerVisibility( marker ) {
   // Filter settings
-  var gradeRange          = gradeSlider.slider( 'getValue' );
+  //var gradeRange          = gradeSlider.slider( 'getValue' );
+  var gradeRange          = rangeSlider.noUiSlider.get();
   var topQualityChecked   = $( '#top-quality-filter' ).prop( 'checked' );
   var basicQualityChecked = $( '#basic-quality-filter' ).prop( 'checked' );
   var maleGenderChecked   = $( '#male-gender-filter' ).prop( 'checked' );
@@ -204,7 +248,7 @@ function setMarkerVisibility( marker ) {
 
   if ( gradeNumeric === 0 || ( gradeRange[ 0 ] <= gradeNumeric && gradeNumeric <= gradeRange[ 1 ] ) ) {
     if ( ( quality === 'Top' && topQualityChecked === true ) || ( quality === 'Basic' && basicQualityChecked === true ) ) {
-      if ( ( ( votedBy === 'Male' || votedBy === 'Both' ) && maleGenderChecked === true ) || ( ( votedBy === 'Female' || votedBy === 'Both' ) && femaleGenderChecked === true ) ) {
+      if ( ( ( votedBy === 'Male' || votedBy === 'Both' ) && maleGenderChecked === true ) || ( ( votedBy === 'Female' || votedBy === 'Both' ) && femaleGenderChecked === true ) ) {
         marker.setVisible( true );
       }
       else {
@@ -234,25 +278,6 @@ function setVisibleMarkersCounter() {
 
   $( '#visible-boulder-counter' ).text( counter );
 }
-
-
-/////////////////////////////////////////////////////////////////////////////
-// JQUERY FUNCTIONS
-/////////////////////////////////////////////////////////////////////////////
-var gradeSlider = $( '#grade-filter' ).slider({
-  tooltip: 'always',
-  formatter: function( gradeRange ) {
-    var gradeStr;
-    if ( gradeRange[ 0 ] === gradeRange[ 1 ] ) {
-      gradeStr = GRADES[ gradeRange[ 0 ] ];
-    }
-    else {
-      gradeStr = GRADES[ gradeRange[ 0 ] ] + ' - ' + GRADES[ gradeRange[ 1 ] ];
-    }
-  
-    return gradeStr;
-  }
-});
 
 
 /////////////////////////////////////////////////////////////////////////////
