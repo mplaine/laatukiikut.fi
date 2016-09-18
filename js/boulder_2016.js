@@ -10,7 +10,6 @@ var MIN_VOTES_FOR_TOP_QUALITY = 6;
 var GRADES                    = [ '?', '1', '2', '3', '4', '4+', '5', '5+', '6A', '6A+', '6B', '6B+', '6C', '6C+', '7A', '7A+', '7B', '7B+', '7C', '7C+', '8A', '8A+', '8B', '8B+', '8C', '8C+', '9A' ];
 
 
-
 /////////////////////////////////////////////////////////////////////////////
 // FUNCTIONS
 /////////////////////////////////////////////////////////////////////////////
@@ -35,9 +34,9 @@ function initializeMap() {
 
   // Marker icons
   var icons          = {
-    basic:   'img/marker_boulder_basic_quality.png',
-    top:     'img/marker_boulder_top_quality.png',
-    cluster: 'img/marker_boulder_cluster.png'
+    Basic:   'img/marker_boulder_basic_quality.png',
+    Top:     'img/marker_boulder_top_quality.png',
+    Cluster: 'img/marker_boulder_cluster.png'
   };
 
   // Create an information window for markers
@@ -60,15 +59,16 @@ function initializeMap() {
   // Create markers
   for ( var i = 0; i < boulders.length; i++ ) {
     var boulder      = boulders[ i ];
-    var quality      = ( boulder.Votes >= MIN_VOTES_FOR_TOP_QUALITY ) ? 'top' : 'basic';
+    var quality      = ( boulder.Votes >= MIN_VOTES_FOR_TOP_QUALITY ) ? 'Top' : 'Basic';
+    var votedBy      = boulder.VotedBy;
     var content      = getInfoWindowContent( boulder );
     var gradeNumeric = boulder.GradeNumeric;
     var icon         = icons[ quality ];
     var position     = new google.maps.LatLng( boulder.Latitude, boulder.Longitude );
-    var zIndex       = ( quality === 'top' ) ? 2 : 1;
+    var zIndex       = ( quality === 'Top' ) ? 2 : 1;
     
     // Create a marker
-    var marker       = createMarker( content, quality, gradeNumeric, {
+    var marker       = createMarker( content, quality, votedBy, gradeNumeric, {
       icon:     icon,
       position: position,
       zIndex:   zIndex
@@ -86,10 +86,11 @@ function initializeMap() {
 
   // Create a marker clusterer
   markerClusterer    = createMarkerClusterer( markers, {
-    icon: icons.cluster,
+    icon: icons.Cluster,
     ignoreHidden: true
   });
-
+  // Keep track of the number of visible markers. All are visible in the beginning
+  $( '#visible-boulder-counter' ).text( markerClusterer.getTotalMarkers() );
 
   // Zoom map in/out to fit bounds
   map.fitBounds( bounds );
@@ -132,7 +133,7 @@ function createOverlappingMarkerSpiderfier() {
   });
 }
 
-function createMarker( content, quality, gradeNumeric, options ) {
+function createMarker( content, quality, votedBy, gradeNumeric, options ) {
   var marker          = new google.maps.Marker({
     icon: options.icon,
     position: options.position,
@@ -141,11 +142,11 @@ function createMarker( content, quality, gradeNumeric, options ) {
   // Set extra properties on the marker
   marker.content      = content;
   marker.quality      = quality;
+  marker.votedBy      = votedBy;
   marker.gradeNumeric = gradeNumeric;
 
   return marker;
 }
-
 
 function getInfoWindowContent( data ) {
   var content       = '';
@@ -188,6 +189,52 @@ function getInfoWindowContent( data ) {
   return content;
 }
 
+function setMarkerVisibility( marker ) {
+  // Filter settings
+  var gradeRange          = gradeSlider.slider( 'getValue' );
+  var topQualityChecked   = $( '#top-quality-filter' ).prop( 'checked' );
+  var basicQualityChecked = $( '#basic-quality-filter' ).prop( 'checked' );
+  var maleGenderChecked   = $( '#male-gender-filter' ).prop( 'checked' );
+  var femaleGenderChecked = $( '#female-gender-filter' ).prop( 'checked' );
+
+  // Marker properties
+  var gradeNumeric        = parseInt( marker.gradeNumeric );
+  var quality             = marker.quality;
+  var votedBy             = marker.votedBy;
+
+  if ( gradeNumeric === 0 || ( gradeRange[ 0 ] <= gradeNumeric && gradeNumeric <= gradeRange[ 1 ] ) ) {
+    if ( ( quality === 'Top' && topQualityChecked === true ) || ( quality === 'Basic' && basicQualityChecked === true ) ) {
+      if ( ( ( votedBy === 'Male' || votedBy === 'Both' ) && maleGenderChecked === true ) || ( ( votedBy === 'Female' || votedBy === 'Both' ) && femaleGenderChecked === true ) ) {
+        marker.setVisible( true );
+      }
+      else {
+        marker.setVisible( false );
+      }
+    }
+    else {
+      marker.setVisible( false );
+    }
+  }
+  else {
+    marker.setVisible( false );
+  }
+}
+
+function setVisibleMarkersCounter() {
+  var markers = markerClusterer.getMarkers();
+  var counter = 0;
+
+  for ( var i = 0; i < markers.length; i++ ) {
+    var marker = markers[ i ];
+
+    if ( marker.getVisible() === true ) {
+      counter++;
+    }
+  }
+
+  $( '#visible-boulder-counter' ).text( counter );
+}
+
 
 /////////////////////////////////////////////////////////////////////////////
 // JQUERY FUNCTIONS
@@ -225,23 +272,12 @@ $( '#grade-filter' ).on( 'change', function( event ) {
     infoWindow.close();
 
     var markers             = markerClusterer.getMarkers();
-    var topQualityChecked   = $( '#top-quality-filter' ).prop( 'checked' );
-    var basicQualityChecked = $( '#basic-quality-filter' ).prop( 'checked' );
-
     for ( var i = 0; i < markers.length; i++ ) {
-      var marker            = markers[ i ];
-      var quality           = marker.quality;
-      var qualityChecked    = ( quality === 'top' ) ? topQualityChecked : basicQualityChecked;
-      var gradeNumeric      = parseInt( marker.gradeNumeric );
-
-      if ( qualityChecked && ( gradeNumeric === 0 || ( gradeRange[ 0 ] <= gradeNumeric && gradeNumeric <= gradeRange[ 1 ] ) ) ) {
-        marker.setVisible( true );
-      }
-      else {
-        marker.setVisible( false );        
-      }
+      setMarkerVisibility( markers[ i ] );
     }
+
     markerClusterer.repaint();
+    setVisibleMarkersCounter();
 
     if ( gradeRange[ 0 ] === gradeRange[ 1 ] ) {
       $( '#grade-display' ).text( GRADES[ gradeRange[ 1 ] ] );
@@ -256,23 +292,13 @@ $( '#top-quality-filter' ).on( 'change', function () {
   // Close information window
   infoWindow.close();
 
-  var markers        = markerClusterer.getMarkers();
-  var gradeRange     = gradeSlider.slider( 'getValue' );
-
+  var markers = markerClusterer.getMarkers();
   for ( var i = 0; i < markers.length; i++ ) {
-    var marker       = markers[ i ];
-    var gradeNumeric = parseInt( marker.gradeNumeric );
-    
-    if ( marker.quality === 'top' ) {
-      if ( this.checked === true && ( gradeNumeric === 0 || ( gradeRange[ 0 ] <= gradeNumeric && gradeNumeric <= gradeRange[ 1 ] ) ) ) {
-        marker.setVisible( true );
-      }
-      else {
-        marker.setVisible( false );        
-      }
-    }
+    setMarkerVisibility( markers[ i ] );
   }
+
   markerClusterer.repaint();
+  setVisibleMarkersCounter();
 });
 
 $( '#basic-quality-filter' ).on( 'change', function () {
@@ -280,22 +306,38 @@ $( '#basic-quality-filter' ).on( 'change', function () {
   infoWindow.close();
 
   var markers        = markerClusterer.getMarkers();
-  var gradeRange     = gradeSlider.slider( 'getValue' );
-
   for ( var i = 0; i < markers.length; i++ ) {
-    var marker       = markers[ i ];
-    var gradeNumeric = parseInt( marker.gradeNumeric );
-
-    if ( marker.quality === 'basic' ) {
-      if ( this.checked === true && ( gradeNumeric === 0 || ( gradeRange[ 0 ] <= gradeNumeric && gradeNumeric <= gradeRange[ 1 ] ) ) ) {
-        marker.setVisible( true );
-      }
-      else {
-        marker.setVisible( false );        
-      }
-    }
+    setMarkerVisibility( markers[ i ] );
   }
+
   markerClusterer.repaint();
+  setVisibleMarkersCounter();
+});
+
+$( '#male-gender-filter' ).on( 'change', function () {
+  // Close information window
+  infoWindow.close();
+
+  var markers = markerClusterer.getMarkers();
+  for ( var i = 0; i < markers.length; i++ ) {
+    setMarkerVisibility( markers[ i ] );
+  }
+
+  markerClusterer.repaint();
+  setVisibleMarkersCounter();
+});
+
+$( '#female-gender-filter' ).on( 'change', function () {
+  // Close information window
+  infoWindow.close();
+
+  var markers        = markerClusterer.getMarkers();
+  for ( var i = 0; i < markers.length; i++ ) {
+    setMarkerVisibility( markers[ i ] );
+  }
+
+  markerClusterer.repaint();
+  setVisibleMarkersCounter();
 });
 
 document.getElementById( 'sidebar-close' ).addEventListener( 'click', function () {
