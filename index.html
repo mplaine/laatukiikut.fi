@@ -1,32 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="fi">
+
+
   <head>
+
+
+    <!--
+    //////////////////////////////////////////////////////////////////////////
+    // META INFORMATION AND FAVICONS
+    //////////////////////////////////////////////////////////////////////////
+    -->
+    <!-- Meta information -->
     <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Laatukiikut.fi | Suomen Parhaat Boulderit 2016</title>
+    <meta http-equiv="content-language" content="fi" />
+    <meta name="description" content="Suomen parhaat boulderit nyt kätevästi kartalla. Tutki karttaa ja löydä lähialueesi laadukkaimmat boulderit tai suunnittele vaikka pidempi reissu todellisten timanttien luokse!" />
+    <meta name="keywords" content="laatukiikut, suomen parhaat boulderit, 2016, boulderointi, kiipeily, suomi" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link type="text/css" rel="stylesheet" href="css/boulder_2016.css" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Markku Laine" />
+    <meta name="copyright" content="Markku Laine" />
+    <!-- Generated with https://realfavicongenerator.net/ -->
+    <meta name="apple-mobile-web-app-title" content="Laatukiikut" />
+    <meta name="application-name" content="Laatukiikut" />
+    <meta name="msapplication-TileColor" content="#f1c40f" />
+    <meta name="msapplication-TileImage" content="/resources/images/favicons/mstile-144x144.png?v=Ryo2jM08W9" />
+    <meta name="msapplication-config" content="/resources/images/favicons/browserconfig.xml?v=Ryo2jM08W9" />
+    <meta name="theme-color" content="#f1c40f" />
+
+    <!-- Favicons; generated with https://realfavicongenerator.net/ -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/resources/images/favicons/apple-touch-icon.png?v=Ryo2jM08W9" />
+    <link rel="icon" type="image/png" href="/resources/images/favicons/favicon-32x32.png?v=Ryo2jM08W9" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/resources/images/favicons/favicon-194x194.png?v=Ryo2jM08W9" sizes="194x194" />
+    <link rel="icon" type="image/png" href="/resources/images/favicons/android-chrome-192x192.png?v=Ryo2jM08W9" sizes="192x192" />
+    <link rel="icon" type="image/png" href="/resources/images/favicons/favicon-16x16.png?v=Ryo2jM08W9" sizes="16x16" />
+    <link rel="manifest" href="/resources/images/favicons/manifest.json?v=Ryo2jM08W9" />
+    <link rel="mask-icon" href="/resources/images/favicons/safari-pinned-tab.svg?v=Ryo2jM08W9" color="#c29d0b" />
+    <link rel="shortcut icon" href="/resources/images/favicons/favicon.ico?v=Ryo2jM08W9" />
+
+
+    <!--
+    //////////////////////////////////////////////////////////////////////////
+    // TITLE
+    //////////////////////////////////////////////////////////////////////////
+    -->
+    <!-- Title -->
+    <title>Laatukiikut.fi - Suomen Parhaat Boulderit 2016</title>
+
+
+    <!--
+    //////////////////////////////////////////////////////////////////////////
+    // STYLESHEETS AND FONTS
+    //////////////////////////////////////////////////////////////////////////
+    -->
+    <!-- Vendor stylesheets -->
+    <link type="text/css" rel="stylesheet" href="vendors/bootstrap-customized/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendors/nouislider/nouislider.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendors/nouislider/nouislider.tooltips.css" />
+
+    <!-- Vendor fonts -->
+    <link type="text/css" rel="stylesheet" href="https://file.myfontastic.com/MSVqKk3pTHW3BYL7kDerdj/icons.css" />
+    <!-- <link type="text/css" rel="stylesheet" href="vendors/fontastic/laatukiikut/styles.css" /> -->
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700" />
+
+    <!-- Laatukiikut stylesheets -->
+    <link type="text/css" rel="stylesheet" href="resources/css/boulders-2016.css" />
+
+
   </head>
+
+
   <body>
-    <div id="map"></div>
-    <aside id="sidebar">
-      <button id="sidebar-close">Sulje</button>
-      <div class="info">
-        <h1>Laatukiikut.fi</h1>
-        <h2>&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot;&middot; Suomen Parhaat Boulderit 2016</h2>
-        <p>Suomen parhaat boulderit nyt kätevästi kartalla. Selaa karttaa ja suunnista lähialueesi laatubouldereille tai suunnittele vaikka pidempi reissu todellisten timanttien luokse!</p>
-        <p>Tämän palvelun on toteuttanut <a href="https://twitter.com/mplaine" target="_blank">Markku Laine</a>, jolta loppuivat lähialueen laatukiikut kesken.</p>
-        <p>Kartalla esittävä <a href="https://docs.google.com/spreadsheets/d/1OLrficW4lizuOlCJ5j66d0D3A68EeBDOp_5L6XCbxAs/edit?usp=sharing" target="_blank">tietoaineisto</a> ja palvelun <a href="https://github.com/mplaine/www.laatukiikut.fi" target="_blank">lähdekoodit</a> ovat avointa dataa.</p>
+
+
+    <!--
+    //////////////////////////////////////////////////////////////////////////
+    // USER INTERFACE
+    //////////////////////////////////////////////////////////////////////////
+    -->
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            <span class="icon-logo" aria-hidden="true"></span>
+            <h1>Laatukiikut</h1>
+          </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="nav-item-about" role="presentation" class="nav-item"><a id="btn-about" class="btn-collapse" href="#content-about-collapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="content-about-collapse"><span class="icon-about" aria-hidden="true"></span></a></li>
+          <li id="nav-item-filters" role="presentation" class="nav-item"><a id="btn-filters" class="btn-collapse" href="#content-filters-collapse" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="content-filters-collapse"><span class="icon-filters" aria-hidden="true"></span></a></li>
+        </ul>
       </div>
-    </aside>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script>window.jQuery || document.write( '<script type="text/javascript" src="js/third-party/jquery-3.1.0.min.js"><\/script>' )</script>
-    <script type="text/javascript" src="js/third-party/papaparse.min.js"></script>
-    <script type="text/javascript" src="js/datasource.js"></script>
-    <script type="text/javascript" src="js/boulder_2016.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.24&key=AIzaSyAEdHStftpbGYbUl48xILoe6c9y_HyPzv4&callback=initialize&language=fi&region=FI"></script>
-    <script type="text/javascript" src="js/third-party/oms.min.js"></script>
-    <script type="text/javascript" src="js/third-party/markerclusterer.js"></script>
+    </nav>
+
+    <!-- Content: About (collapse) -->
+    <div id="content-about-collapse" class="container collapse">
+      <div class="content-container">
+        <div class="logo-container">
+          <span class="icon-logo" aria-hidden="true"></span>
+        </div>
+        <div class="description-container">
+          <h2>Laatukiikut.fi</h2>
+          <h3>Suomen Parhaat Boulderit 2016</h3>
+          <p>Suomen parhaat boulderit nyt kätevästi kartalla. Tutki karttaa ja löydä lähialueesi laadukkaimmat boulderit tai suunnittele vaikka pidempi reissu todellisten timanttien luokse! Näppärien suodattimien sekä betavideoiden ansiosta löydät juuri sinulle parhaiten sopivat laatukiikut.</p>
+          <p>Tämän palvelun ovat tehneet <a href="mailto:markku.laine@gmail.com?subject=Laatukiikut.fi - Palaute">Markku Laine</a> ja <a href="mailto:leskinen.jussi@gmail.com?subject=Laatukiikut.fi - Palaute">Jussi Leskinen</a>, joilta loppuivat lähialueen laatukiikut kesken.</p>
+          <p>Kartalla esitettävät tiedot perustuvat Suomen parhaat boulderit 2016 -kyselyn <a href="https://docs.google.com/spreadsheets/d/1yhoBNVjLgMF-ZNEmWwRCMHTRBEhcC4VrDVCqeq-VkKc/edit?usp=sharing" target="_blank">tietoaineistoon</a>. Tietoaineisto on kaikille avointa dataa.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content: Filters (collapse) -->
+    <div id="content-filters-collapse" class="container collapse">
+      <div class="content-container">
+        <div class="description-container">
+          <h2>Suodattimet</h2>
+          <h3>Bouldereita <span id="visible-markers-counter" class="badge">0</span></h3>
+          <div class="forms">
+            <form>
+              <div class="form-group votes">
+                <label>Äänimäärä</label>
+                <div id="slider-votes" class="noUi-extended"></div>
+              </div>
+              <div class="form-group grade">
+                <label>Vaikeus</label>
+                <div id="slider-grade" class="noUi-extended"></div>
+              </div>
+              <div class="form-group gender">
+                <label>Sukupuoli</label>
+                <button type="button" id="btn-male" class="btn btn-default btn-checked"><span class="icon-male" aria-hidden="true"></span> Mies</button> <button id="btn-female" type="button" class="btn btn-default btn-checked"><span class="icon-female" aria-hidden="true"></span> Nainen</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content: Map -->
+    <div id="content-map" class="container"></div>
+
+
+    <!--
+    //////////////////////////////////////////////////////////////////////////
+    // JAVASCRIPT LIBRARIES INCL. GOOGLE MAPS AND GOOGLE ANALYTICS
+    //////////////////////////////////////////////////////////////////////////
+    -->
+    <!-- Vendors -->
+    <script type="text/javascript" src="vendors/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="vendors/bootstrap-customized/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="vendors/papaparse/papaparse.min.js"></script>
+    <script type="text/javascript" src="vendors/nouislider/nouislider.min.js"></script>
+    <script type="text/javascript" src="vendors/wnumb/wNumb.js"></script>
+
+    <!-- Resources -->
+    <script type="text/javascript" src="resources/js/datasource.js"></script>
+    <script type="text/javascript" src="resources/js/boulders-2016.js"></script>
+
+    <!-- Google Maps + related vendors -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.24&key=AIzaSyAEdHStftpbGYbUl48xILoe6c9y_HyPzv4&language=fi&region=FI"></script>
+    <script type="text/javascript" src="vendors/markerclustererplus/markerclusterer.min.js"></script>
+    <script type="text/javascript" src="vendors/overlappingmarkerspiderfier/oms.min.js"></script>
+
+    <!-- Google Analytics -->
     <script type="text/javascript">
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -36,5 +171,9 @@
       ga('create', 'UA-84111013-1', 'auto');
       ga('send', 'pageview');
     </script>
+
+
   </body>
+
+
 </html>
