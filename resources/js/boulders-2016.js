@@ -227,17 +227,17 @@ var boulders2016 = ( function () {
     var note     = ( data.ApproximateLocation === 'Yes' ) ? ' <span class="approximate-location">(pääsyherkkä alue)</span>' : '';
     var location = ( crag !== '' ) ? crag + ', ' + area : area;
     var urls          = [];
-    if ( data.Url27crags !== '' ) {
-      urls.push( '<a href="' + data.Url27crags + '" target="_blank">27crags</a>' );
-    }
-    if ( data.ApproximateLocation === 'No' ) {
-      urls.push( '<a href="https://www.google.fi/maps?saddr=Current+Location&daddr=' + data.Latitude + '%2C%20' + data.Longitude + '" target="_blank">Reittiohjeet</a>' );
-    }
     if ( data.UrlVideo !== '' ) {
       urls.push( '<a href="' + data.UrlVideo + '" target="_blank">Video</a>' );
     }
     if ( data.UrlStory !== '' ) {
       urls.push( '<a href="' + data.UrlStory + '" target="_blank">Tarina</a>' );
+    }
+    if ( data.Url27crags !== '' ) {
+      urls.push( '<a href="' + data.Url27crags + '" target="_blank">27crags</a>' );
+    }
+    if ( data.ApproximateLocation === 'No' ) {
+      urls.push( '<a href="https://www.google.fi/maps?saddr=Current+Location&daddr=' + data.Latitude + '%2C%20' + data.Longitude + '" target="_blank">Reittiohjeet</a>' );
     }
 
     var links    = '';
