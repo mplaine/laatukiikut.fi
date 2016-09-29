@@ -231,7 +231,7 @@ var boulders2016 = ( function () {
       urls.push( '<a href="' + data.Url27crags + '" target="_blank">27crags</a>' );
     }
     if ( data.ApproximateLocation === 'No' ) {
-      urls.push( '<a href="https://maps.google.fi/maps?saddr=Current+Location&daddr=' + data.Latitude + '%2C%20' + data.Longitude + '" target="_blank">Reittiohjeet</a>' );
+      urls.push( '<a href="https://www.google.fi/maps?saddr=Current+Location&daddr=' + data.Latitude + '%2C%20' + data.Longitude + '" target="_blank">Reittiohjeet</a>' );
     }
     if ( data.UrlVideo !== '' ) {
       urls.push( '<a href="' + data.UrlVideo + '" target="_blank">Video</a>' );
