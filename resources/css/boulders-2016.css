@@ -153,7 +153,7 @@ body {
 #content-about-collapse a,
 #content-about-collapse a:hover,
 #content-about-collapse a:focus {
-  color: #C29D0B;
+  color: #F1C40F;
   text-decoration: underline;
 }
 #content-about-collapse .logo-container {
@@ -205,7 +205,7 @@ body {
   font-weight: 500;
   margin-bottom: 35px;
 }
-#content-filters-collapse .form-group,gender > label {
+#content-filters-collapse .form-group.gender > label {
   margin-bottom: 10px;
 }
 
@@ -321,7 +321,7 @@ body {
 .marker-info a,
 .marker-info a:hover,
 .marker-info a:focus {
-  color: #C29D0B;
+  color: #F1C40F;
   text-decoration: underline;
 }
 .marker-info .approximate-location {
