@@ -224,9 +224,10 @@ var boulders2016 = ( function () {
     var boulder  = name + ' (' + grade + ')';
     var crag     = ( data.Crag !== '' ) ? data.Crag : '';
     var area     = ( data.AreaLevel3 !== '' ) ? data.AreaLevel3 : ( data.AreaLevel2 !== '' ) ? data.AreaLevel2 : data.AreaLevel1;
+    var weather  = ( data.AreaLevel3 !== '' ) ? data.AreaLevel3 : ( data.AreaLevel2 !== '' ) ? data.AreaLevel2 : '';
     var note     = ( data.ApproximateLocation === 'Yes' ) ? ' <span class="approximate-location">(pääsyherkkä alue)</span>' : '';
     var location = ( crag !== '' ) ? crag + ', ' + area : area;
-    var urls          = [];
+    var urls     = [];
     if ( data.UrlVideo !== '' ) {
       urls.push( '<a href="' + data.UrlVideo + '" target="_blank">Video</a>' );
     }
@@ -235,6 +236,9 @@ var boulders2016 = ( function () {
     }
     if ( data.Url27crags !== '' ) {
       urls.push( '<a href="' + data.Url27crags + '" target="_blank">27crags</a>' );
+    }
+    if ( weather !== '' ) {
+      urls.push( '<a href="http://ilmatieteenlaitos.fi/saa/' + encodeURIComponent( weather ) + '" target="_blank">Sää</a>' );
     }
     if ( data.ApproximateLocation === 'No' ) {
       urls.push( '<a href="https://www.google.fi/maps?saddr=Current+Location&daddr=' + data.Latitude + '%2C%20' + data.Longitude + '" target="_blank">Reittiohjeet</a>' );
