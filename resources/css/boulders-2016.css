@@ -309,6 +309,9 @@ body {
   position: relative;
   width: 100%;
 }
+#content-map.container {
+  padding: 0;
+}
 
 /* Marker information window */
 .marker-info > h4 {
