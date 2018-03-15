@@ -1,0 +1,347 @@
+/*****************************************************************************
+ * DOCUMENT
+ ****************************************************************************/
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #F8F8F8;
+  color: #2C2C2C;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  min-width: 300px;
+  padding-top: 56px;
+  width: auto !important;
+}
+
+
+/*****************************************************************************
+ * ICONS
+ ****************************************************************************/
+.icon-logo,
+.icon-about,
+.icon-filters,
+.icon-close,
+.icon-location,
+.icon-male,
+.icon-female {
+  display: inline-block;
+  vertical-align: middle;
+}
+.icon-logo::before,
+.icon-logo::after {
+  display: table;
+  vertical-align: middle;
+}
+.icon-logo {
+  font-size: 24px;
+  margin-right: 6px;
+}
+.icon-about {
+  font-size: 16px;
+  padding-top: 5px;
+}
+.icon-filters {
+  font-size: 22px;
+  padding-top: 2px;
+}
+.icon-close {
+  font-size: 24px;
+}
+.icon-location {
+  font-size: 12px;
+}
+
+
+/*****************************************************************************
+ * NAVIGATION
+ ****************************************************************************/
+.navbar {
+  margin-bottom: 0;
+}
+.navbar-fixed-top {
+  background-color: #F1C40F;
+  border: none;
+}
+.navbar-fixed-top > .container {
+  height: 56px;
+}
+.navbar-fixed-top .navbar-header {
+  height: inherit;
+}
+.navbar-fixed-top .navbar-header > .navbar-brand {
+  color: #2C2C2C;
+  height: inherit;
+}
+.navbar-fixed-top .navbar-header > .navbar-brand > h1 {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.navbar-fixed-top .nav {
+  display: table-row;
+  height: inherit;
+}
+.navbar-fixed-top .navbar-right > .nav-item {
+  display: table-cell;
+  height: inherit;
+  vertical-align: middle;
+  text-align: center;
+}
+.navbar-fixed-top .navbar-right > .nav-item > a,
+.navbar-fixed-top .navbar-right > .nav-item > a:hover,
+.navbar-fixed-top .navbar-right > .nav-item > a:focus {
+  color: #2C2C2C;
+  display:table-cell;
+  height: inherit;
+  vertical-align: middle;
+  min-width: 56px;
+}
+#btn-about.btn-collapse {
+  background-color: transparent;
+}
+#btn-about.btn-collapsing {
+  background-color: #FFFFFF;
+  color: #2C2C2C;
+}
+#btn-about.btn-collapse.in {
+  background-color: #FFFFFF;
+  color: #2C2C2C;
+}
+#btn-filters.btn-collapse {
+  background-color: transparent;
+}
+#btn-filters.btn-collapsing {
+  background-color: #FFFFFF;
+  color: #2C2C2C;
+}
+#btn-filters.btn-collapse.in {
+  background-color: #FFFFFF;
+  color: #2C2C2C;
+}
+
+
+/*****************************************************************************
+ * CONTENT
+ ****************************************************************************/
+/* General */
+.content-container {
+  padding: 15px 10px 15px 10px;
+}
+.supersize-container {
+  padding-bottom: 5px;
+  padding-top: 15px;
+  text-align: center;
+}
+
+/* About (collapse) */
+#content-about-collapse {
+  background-color: #FFFFFF;
+  color: #2C2C2C;
+}
+#content-about-collapse .icon-logo {
+  font-size: 70px;
+  text-align: center;
+}
+#content-about-collapse h2 {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+#content-about-collapse h3 {
+  color: #777777;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 40px 0;
+  padding: 0;
+  text-align: center;
+}
+#content-about-collapse a,
+#content-about-collapse a:hover,
+#content-about-collapse a:focus {
+  color: #E2B70D;
+  text-decoration: underline;
+}
+
+ /* Filters (collapse) */
+#content-filters-collapse {
+  background-color: #FFFFFF;
+  color: #2C2C2C;
+}
+#content-filters-collapse .visible-markers-counter {
+  font-size: 70px;
+  line-height: 60px;
+  text-align: center;
+}
+#content-filters-collapse h2 {
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-transform: uppercase;
+}
+#content-filters-collapse h3 {
+  color: #777777;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0 0 40px 0;
+  padding: 0;
+  text-align: center;
+}
+#content-filters-collapse .form-group {
+  margin-bottom: 40px;
+  text-align: left;
+}
+#content-filters-collapse .form-group.gender {
+  margin-bottom: 10px;
+}
+#content-filters-collapse .form-group > label {
+  color: #2C2C2C;
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 35px;
+}
+#content-filters-collapse .form-group.gender > label {
+  margin-bottom: 10px;
+}
+
+/* noUiSlider */
+.noUi-background {
+  background-color: #DDDDDD;
+  box-shadow: none;
+}
+.noUi-horizontal {
+  height: 2px;
+}
+.noUi-horizontal.noUi-extended {
+  padding-right: 23px;
+}
+.noUi-horizontal .noUi-handle {
+  border-radius: 12px;
+  width: 24px;
+  height: 24px;
+  top: -12px;
+  box-shadow: 0px 1px 1px 0px rgba( 44, 44, 44, 0.9 );
+  border: 1px solid rgba( 44, 44, 44, 0.2 );
+  background-color: #F1C40F;
+}
+.noUi-horizontal .noUi-handle:after,
+.noUi-horizontal .noUi-handle:before {
+  display: none;
+}
+.noUi-horizontal .noUi-handle-lower .noUi-tooltip,
+.noUi-horizontal .noUi-handle-upper .noUi-tooltip {
+  top: -32px;
+}
+.noUi-horizontal.noUi-extended .noUi-handle {
+  left: -1px;
+}
+.noUi-horizontal.noUi-extended .noUi-origin  {
+  right: -23px;
+}
+.noUi-connect {
+  background-color: #F1C40F;
+  box-shadow: inset 0 0 1px rgba( 44, 44, 44, 0.45 );
+}
+.noUi-target {
+  border: none;
+  border-radius: 0;
+}
+.noUi-tooltip {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  color: #777777;
+  font-size: 12px;
+  font-weight: 500;
+  left: 3px;
+}
+.grade .noUi-tooltip {
+  left: 0;
+}
+
+/* Gender buttons */
+.gender .btn {
+  background-color: #FFFFFF;
+}
+.gender .btn-default {
+  background-color: #FFFFFF;
+  border: 1px solid #AAAAAA;
+  color: #AAAAAA;
+}
+.gender .btn-default:hover,
+.gender .btn-default:focus {
+  background-color: #FFFFFF;
+  border: 1px solid #777777;
+  color: #777777;
+}
+.gender #btn-male {
+  margin-right: 5px;
+}
+.gender .btn-checked {
+  background-color: #F1C40F;
+  border: 1px solid #A28309;
+  color: #2C2C2C;
+}
+.gender .btn-checked:hover,
+.gender .btn-checked:focus {
+  background-color: #F6D85F;
+  border: 1px solid #A28309;
+  color: #2C2C2C;
+}
+
+
+ /* Map */
+#content-map {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+#content-map.container {
+  padding: 0;
+}
+
+/* Marker information window */
+.marker-info > h4 {
+  color: #2C2C2C;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0;
+  padding: 0 0 2px 0;
+}
+.marker-info > p {
+  color: #777777;
+  margin: 0;
+  padding: 0;
+}
+.marker-info .links {
+  padding-top: 20px;
+}
+.marker-info a,
+.marker-info a:hover,
+.marker-info a:focus {
+  color: #E2B70D;
+  text-decoration: underline;
+}
+.marker-info .approximate-location {
+  color: #FF4444;
+}
+.marker-info .comment {
+  font-style: italic;
+}
+.marker-info .comment.first {
+  padding-top: 10px;
+}
