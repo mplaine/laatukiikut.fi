@@ -20,11 +20,12 @@ After starting the web server, the website can be accessed at `http://localhost:
 
 ## Technologies
 
-HTML, CSS, JavaScript + third-party libraries: [Google Maps](https://developers.google.com/maps/documentation/javascript/), [MarkerClusterPlus](https://github.com/mahnunchik/markerclustererplus), [OverlappingMarkerSpiderfier](https://github.com/jawj/OverlappingMarkerSpiderfier), [Bootstrap](https://getbootstrap.com/), [jQuery](https://jquery.com/), [Google Fonts](https://fonts.google.com/), [Fontastic](http://fontastic.me/), [noUiSlider](https://refreshless.com/nouislider/), [Papa Parse](https://www.papaparse.com/), [wNumb](https://refreshless.com/wnumb/).
+HTML, CSS, JavaScript + third-party libraries and services: [Google Maps](https://developers.google.com/maps/documentation/javascript/), [MarkerClusterPlus](https://github.com/mahnunchik/markerclustererplus), [OverlappingMarkerSpiderfier](https://github.com/jawj/OverlappingMarkerSpiderfier), [Bootstrap](https://getbootstrap.com/), [jQuery](https://jquery.com/), [Google Fonts](https://fonts.google.com/), [Fontastic](http://fontastic.me/), [noUiSlider](https://refreshless.com/nouislider/), [Papa Parse](https://www.papaparse.com/), [wNumb](https://refreshless.com/wnumb/).
 
 ## Authors
 
-Markku Laine (survey, coding, etc.) & Jussi Leskinen (icons)
+* **Markku Laine** - idea, survey, data wrangling and analysis, web development, etc.
+* **Jussi Leskinen** - icons
 
 ## License
 
