@@ -334,6 +334,7 @@ body {
 .marker-info a:hover,
 .marker-info a:focus {
   color: #E2B70D;
+  outline: none;
   text-decoration: underline;
 }
 .marker-info .approximate-location {
